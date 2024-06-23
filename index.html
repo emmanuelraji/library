@@ -8,37 +8,50 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <section class="books"></section>
-    <form action="#">
-      <div>
-        <label for="title">Title: </label>
-        <input
-          type="text"
-          id="title"
-          placeholder="Title"
-          required
-          name="title"
-        />
-      </div>
-      <div>
-        <label for="author">Author: </label>
-        <input
-          type="text"
-          id="author"
-          placeholder="Author"
-          name="author"
-          required
-        />
-      </div>
-      <div>
-        <label for="pages">Number of Pages: </label>
-        <input type="number" id="pages" name="pages" required />
-      </div>
-      <div>
-        <input type="checkbox" id="read" name="read" value="read" />
-        <label for="no">Read</label>
-      </div>
-      <button>Add Book</button>
-    </form>
+    <div class="container">
+      <header>
+        <h1>BOOKLY</h1>
+        <button type="button">Add Book</button>
+      </header>
+      <main>
+        <section class="books"></section>
+        <dialog>
+          <form action="#">
+            <div>
+              <label for="title">Title: </label>
+              <input
+                type="text"
+                id="title"
+                placeholder="Title"
+                required
+                name="title"
+              />
+            </div>
+            <div>
+              <label for="author">Author: </label>
+              <input
+                type="text"
+                id="author"
+                placeholder="Author"
+                name="author"
+                required
+              />
+            </div>
+            <div>
+              <label for="pages">Number of Pages: </label>
+              <input type="number" id="pages" name="pages" required />
+            </div>
+            <div>
+              <input type="checkbox" id="read" name="read" value="read" />
+              <label for="no">Read</label>
+            </div>
+            <div>
+              <button type="button" class="hide-modal">Cancel</button>
+              <button>Save</button>
+            </div>
+          </form>
+        </dialog>
+      </main>
+    </div>
   </body>
 </html>

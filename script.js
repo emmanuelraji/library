@@ -21,9 +21,11 @@ let myLibrary = [
 
 const books = document.querySelector(".books");
 const form = document.querySelector("form");
+const dialog = document.querySelector("dialog");
+const showModal = document.querySelector("header button");
+const hideModal = document.querySelector(".hide-modal");
 
 function Book(author, title, numberOfPages, read) {
-  // the constructor...
   this.author = author;
   this.title = title;
   this.numbeOfPages = numberOfPages;
@@ -43,37 +45,48 @@ function displayBooks() {
 
   myLibrary.forEach((book, index) => {
     const bookCard = document.createElement("div");
+    bookCard.setAttribute("class", "book-card");
+
+    const bookDetailsDiv = document.createElement("div");
+    bookDetailsDiv.setAttribute("class", "book-details");
+
+    const readDeleteDiv = document.createElement("div");
+    readDeleteDiv.setAttribute("class", "read-delete");
+
     const bookTitle = document.createElement("p");
-    const bookAuthor = document.createElement("p");
-    const bookPages = document.createElement("p");
-    const bookRead = document.createElement("p");
-    const bookButton = document.createElement("button");
-
-    bookAuthor.innerText = book.author;
     bookTitle.innerText = book.title;
-    bookPages.innerText = book.pages;
+
+    const bookAuthor = document.createElement("p");
+    bookAuthor.innerText = `by ${book.author}`;
+
+    const bookPages = document.createElement("p");
+    bookPages.innerText = `${book.pages} Pages`;
+
+    const bookRead = document.createElement("p");
     bookRead.innerText = book.read;
-    bookButton.innerText = "Delete";
-    bookButton.setAttribute("class", "delete");
-    bookButton.setAttribute("data-index-number", index.toString());
 
-    bookCard.appendChild(bookAuthor);
-    bookCard.appendChild(bookTitle);
-    bookCard.appendChild(bookPages);
-    bookCard.appendChild(bookRead);
-    bookCard.appendChild(bookButton);
+    const bookDeleteBtn = document.createElement("button");
+    bookDeleteBtn.setAttribute("class", "delete");
+    bookDeleteBtn.innerText = "Delete";
+    bookDeleteBtn.setAttribute("data-index-number", index.toString());
+
+    const readBtn = document.createElement("button");
+    readBtn.innerText = "Read";
+
+    bookDetailsDiv.appendChild(bookTitle);
+    bookDetailsDiv.appendChild(bookAuthor);
+    bookDetailsDiv.appendChild(bookPages);
+    bookDetailsDiv.appendChild(bookRead);
+
+    readDeleteDiv.appendChild(readBtn);
+    readDeleteDiv.appendChild(bookDeleteBtn);
+
+    bookCard.appendChild(bookDetailsDiv);
+    bookCard.appendChild(readDeleteDiv);
+
     books.appendChild(bookCard);
-
-    // bookButton.addEventListener("click", (e) => {
-    //   console.log(e.target.dataset.indexNumber);
-    //   const indexBookClicked = e.target.dataset.indexNumber;
-    //   const newLibrary = myLibrary.filter((_, index) => {
-    //     index !== Number(indexBookClicked)
-    //   })
-    //   myLibrary = newLibrary;
-    //   displayBooks();
-    // });
   });
+
   deleteBookFromLibrary();
 }
 
@@ -84,12 +97,15 @@ function deleteBookFromLibrary() {
   buttonsList.forEach((button, index) => {
     button.addEventListener("click", (e) => {
       const indexBookClicked = e.target.dataset.indexNumber;
-      console.log(Number(indexBookClicked));
       myLibrary.splice(index, 1);
       displayBooks();
     });
   });
 }
+
+displayBooks();
+
+// Event Listeners
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -103,7 +119,8 @@ form.addEventListener("submit", (e) => {
 
   addBookToLibrary(userBook);
   displayBooks();
-  console.log(formData);
+  dialog.close();
 });
 
-displayBooks();
+showModal.addEventListener("click", () => dialog.showModal());
+hideModal.addEventListener("click", () => dialog.close());

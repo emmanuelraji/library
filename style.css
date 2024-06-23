@@ -4,10 +4,33 @@
   box-sizing: border-box;
 }
 
+.container {
+  margin: 50px auto;
+  max-width: 400px;
+}
+
+header {
+  text-align: center;
+}
+
 .books {
   margin: 50px 0;
-  height: 100px;
+  /* height: 100px; */
   display: flex;
+  flex-direction: column;
   gap: 20px;
   opacity: 50%;
+}
+
+.book-card {
+  border: 2px solid gray;
+  border-bottom: 20px solid gray;
+  padding: 15px;
+}
+
+dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
