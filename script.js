@@ -40,53 +40,29 @@ function reset() {
   while (books.firstChild) books.removeChild(books.lastChild);
 }
 
-function displayBooks() {
+function renderBooks() {
   reset();
 
-  myLibrary.forEach((book, index) => {
-    const bookCard = document.createElement("div");
-    bookCard.setAttribute("class", "book-card");
+  let html = "";
 
-    const bookDetailsDiv = document.createElement("div");
-    bookDetailsDiv.setAttribute("class", "book-details");
-
-    const readDeleteDiv = document.createElement("div");
-    readDeleteDiv.setAttribute("class", "read-delete");
-
-    const bookTitle = document.createElement("p");
-    bookTitle.innerText = book.title;
-
-    const bookAuthor = document.createElement("p");
-    bookAuthor.innerText = `by ${book.author}`;
-
-    const bookPages = document.createElement("p");
-    bookPages.innerText = `${book.pages} Pages`;
-
-    const bookRead = document.createElement("p");
-    bookRead.innerText = book.read;
-
-    const bookDeleteBtn = document.createElement("button");
-    bookDeleteBtn.setAttribute("class", "delete");
-    bookDeleteBtn.innerText = "Delete";
-    bookDeleteBtn.setAttribute("data-index-number", index.toString());
-
-    const readBtn = document.createElement("button");
-    readBtn.innerText = "Read";
-
-    bookDetailsDiv.appendChild(bookTitle);
-    bookDetailsDiv.appendChild(bookAuthor);
-    bookDetailsDiv.appendChild(bookPages);
-    bookDetailsDiv.appendChild(bookRead);
-
-    readDeleteDiv.appendChild(readBtn);
-    readDeleteDiv.appendChild(bookDeleteBtn);
-
-    bookCard.appendChild(bookDetailsDiv);
-    bookCard.appendChild(readDeleteDiv);
-
-    books.appendChild(bookCard);
+  myLibrary.forEach((book) => {
+    html += `
+      <div class="book-card">
+        <div class="book-details">
+          <p>${book.title}</p>
+          <p>by ${book.author}</p>
+          <p>${book.pages} Pages</p>
+          <p>${book.read}</p>
+        </div>
+        <div class="read-delete">
+          <button>Read</button>
+          <button class="delete">Delete</button>
+        </div>
+      </div>
+    `;
   });
 
+  books.innerHTML = html;
   deleteBookFromLibrary();
 }
 
@@ -96,17 +72,15 @@ function deleteBookFromLibrary() {
 
   buttonsList.forEach((button, index) => {
     button.addEventListener("click", (e) => {
-      const indexBookClicked = e.target.dataset.indexNumber;
       myLibrary.splice(index, 1);
-      displayBooks();
+      renderBooks();
     });
   });
 }
 
-displayBooks();
+renderBooks();
 
 // Event Listeners
-
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -118,7 +92,7 @@ form.addEventListener("submit", (e) => {
   }
 
   addBookToLibrary(userBook);
-  displayBooks();
+  renderBooks();
   dialog.close();
 });
 
