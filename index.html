@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/x-icon" href="/image.png" />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Sandbox</title>
+  </head>
+  <body>
+    <header>
+      <h1>Library 📚</h1>
+      <p>Explore your library of books</p>
+    </header>
+
+    <div id="root"></div>
+    <br />
+
+    <form>
+      <label for="author"> Author: </label>
+      <input id="author" name="author" type="text" />
+
+      <label for="title"> Title: </label>
+      <input id="title" name="title" type="text" />
+
+      <label for="pages"> Pages: </label>
+      <input id="pages" name="pages" type="number" />
+      <label for="read">Read?</label>
+
+      <select name="read" id="read">
+        <option value="">--Please choose an option--</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+      <br />
+      <br />
+      <button>Add new book</button>
+    </form>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
